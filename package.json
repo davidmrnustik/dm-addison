@@ -6,10 +6,12 @@
     "react-scripts": "1.0.17"
   },
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.5",
     "react-burger-menu": "^2.1.11",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-flexbox-grid": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
