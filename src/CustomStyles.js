@@ -8,5 +8,9 @@ export const customStyles = {
   paddingVs: {
     paddingLeft: 30,
     paddingRight: 30
+  },
+  buttonSelected: {
+    color: 'white',
+    backgroundColor: 'green'
   }
 }
