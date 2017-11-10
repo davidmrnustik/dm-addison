@@ -19,8 +19,8 @@ class Event extends Component {
     const { data, betSlip } = this.props;
 
     return(
-      <div className='event'>
-        <div style={styles.alignCenter} className='eventNames'>
+      <div className='event' style={styles.event}>
+        <div className='eventTitle' style={styles.eventTitle}>
           {utils.parseNameFromEvent(data.name).first}
           <span className='eventNamesDivider' style={styles.paddingVs}>{EVENT_VS}</span>
           {utils.parseNameFromEvent(data.name).second}

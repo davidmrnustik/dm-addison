@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-flexbox-grid';
 import Selection from './Selection';
+import { customStyles as styles } from './CustomStyles';
 
 class Market extends Component {
   static propTypes = {
@@ -19,8 +20,8 @@ class Market extends Component {
     const { id, name, selections, betSlip } = this.props;
 
     return(
-      <div className='market'>
-        {name}
+      <div className='market' style={styles.market}>
+        <div className='marginTitle' style={styles.marketTitle}>{name}</div>
         <Row between='xs'>
           {selections.map((selection, index) => (
             <Selection

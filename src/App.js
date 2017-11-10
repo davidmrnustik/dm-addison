@@ -17,8 +17,7 @@ class AdissonApp extends Component {
   }
 
   fetchData() {
-    // const uri = 'http://www.mocky.io/v2/59f08692310000b4130e9f71';
-    const uri = 'http://www.mocky.io/v2/5a0375e03100008213916a52';
+    const uri = 'http://www.mocky.io/v2/59f08692310000b4130e9f71';
     const xhr = new XMLHttpRequest();
 
     return new Promise((resolve, reject) => {
