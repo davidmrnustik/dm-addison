@@ -17,14 +17,33 @@ class AdissonApp extends Component {
   }
 
   fetchData() {
-    const uri = 'http://www.mocky.io/v2/59f08692310000b4130e9f71';
-    const xhr = new XMLHttpRequest();
+    const invocation = new XMLHttpRequest();
+    const url = 'http://www.mocky.io/v2/59f08692310000b4130e9f71';
 
     return new Promise((resolve, reject) => {
-      xhr.open('GET', uri);
-      xhr.onload = () => resolve(JSON.parse(xhr.responseText));
-      xhr.onerror = () => reject(new Error('Something wring with API!'));
-      xhr.send();
+      if (invocation) {
+        invocation.open('GET', url, true);
+        invocation.onreadystatechange = handler;
+        invocation.send();
+      }
+      else {
+        reject(new Error('Something wring with API!'));
+      }
+
+      function handler(xhr) {
+        if (invocation.readyState === 4)
+        {
+          if (invocation.status === 200) {
+              outputResult();
+          }
+          else {
+            reject(new Error('Something wrong with API!'));
+          }
+        }
+      }
+      function outputResult() {
+        resolve(JSON.parse(invocation.responseText));
+      }
     })
   }
 
