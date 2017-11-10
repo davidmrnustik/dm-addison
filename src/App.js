@@ -7,7 +7,7 @@ import BetSlip from './BetSlip';
 import LoadingScreen from './LoadingScreen';
 import IconClose from 'react-icons/lib/md/close';
 import { NavBar } from './NavBar';
-import $ from 'jquery';
+import * as helpers from './helpers';
 
 class AdissonApp extends Component {
   state = {
@@ -18,24 +18,17 @@ class AdissonApp extends Component {
   }
 
   fetchData() {
-
-    $.ajax({
-      type: 'GET',
-      url: 'http://www.mocky.io/v2/59f08692310000b4130e9f71',
-      contentType: 'text/plain',
-
-      xhrFields: {
-        withCredentials: false
-      },
-
-      success: (data) => {
-        this.setState(state => ({ data:data, loading: false }))
-      },
-
-      error: function() {
-        new Error('Something wrong with API!')
+    const url = 'https://www.mocky.io/v2/59f08692310000b4130e9f71';
+    const xhr = helpers.createCORSRequest('GET', url);
+    
+    return new Promise((resolve, reject) => {
+      if (!xhr) {
+        throw new Error('CORS not supported');
       }
-    });
+      xhr.onload = () => resolve(JSON.parse(xhr.responseText));
+      xhr.onerror = () => reject(new Error('Something went wrong with call.'));
+      xhr.send();
+    })
   }
 
   clickEvent = (event, market, selection) => {
@@ -54,7 +47,9 @@ class AdissonApp extends Component {
 
   componentDidMount() {
     this.setState({ loading:true });
-    this.fetchData();
+    this.fetchData()
+      .then(data => this.setState(state => ({ data, loading: false })))
+      .catch(err => console.log(err));
   }
 
   render() {
