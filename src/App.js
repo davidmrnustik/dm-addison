@@ -25,11 +25,10 @@ class AdissonApp extends Component {
       throw new Error('CORS not supported');
     }
 
-    return new Promise((resolve, reject) => {
-      xhr.onload = () => resolve(JSON.parse(xhr.responseText));
-      xhr.onerror = () => reject(new Error('Something wring with API!'));
-      xhr.send();  
-    })
+    xhr.onload = () => this.setState({ data: JSON.parse(xhr.responseText), loading: false });
+    xhr.onerror = () => new Error('Something wrong with API!');
+    xhr.send();
+
   }
 
   clickEvent = (event, market, selection) => {
@@ -48,12 +47,7 @@ class AdissonApp extends Component {
 
   componentDidMount() {
     this.setState({ loading:true });
-
-    this.fetchData()
-      .then(data => {
-        this.setState({ data, loading:false });
-      })
-      .catch(err => console.log(err));
+    this.fetchData();
   }
 
   render() {
