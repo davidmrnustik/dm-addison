@@ -11,7 +11,7 @@ class Market extends Component {
     betSlip: PropTypes.array.isRequired
   }
 
-  clickMarket = (selection) => {
+  clickMarket = selection => {
     this.props.onClickMarket(this.props.id, selection);
   }
 

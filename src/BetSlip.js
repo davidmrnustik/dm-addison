@@ -29,21 +29,22 @@ class BetSlip extends Component {
 
     return(
       <div className='menu'>
-        {betSlip.map(slip => {
+        {betSlip.length === 0 && (
+          <p>There is no selections.</p>
+        )}
 
-          return (
-            <div key={slip.selection}>
-              <p>
-                {this.getSelectionData(this.getMarketData(this.getEventData(slip), slip), slip).name}
-                {' '}
-                {this.getMarketData(this.getEventData(slip), slip).name}
-                <br/>
-                {this.getSelectionData(this.getMarketData(this.getEventData(slip), slip), slip).price}
-              </p>
-              <button onClick={(event) => this.onClickHandler(event, slip)}>Delete</button>
-            </div>
-          )
-        })}
+        {betSlip.map(slip => (
+          <div key={slip.selection}>
+            <p>
+              {this.getSelectionData(this.getMarketData(this.getEventData(slip), slip), slip).name}
+              {' '}
+              {this.getMarketData(this.getEventData(slip), slip).name}
+              <br/>
+              {this.getSelectionData(this.getMarketData(this.getEventData(slip), slip), slip).price}
+            </p>
+            <button onClick={(event) => this.onClickHandler(event, slip)}>Delete</button>
+          </div>
+        ))}
       </div>
     )
   }

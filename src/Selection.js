@@ -12,7 +12,7 @@ class Selection extends Component {
     selected: PropTypes.bool.isRequired
   }
 
-  onClickHandler = (event) => {
+  onClickHandler = event => {
     event.preventDefault();
     this.props.onClickSelection(this.props.id);
   }
