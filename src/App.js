@@ -7,6 +7,7 @@ import BetSlip from './BetSlip';
 import LoadingScreen from './LoadingScreen';
 import IconClose from 'react-icons/lib/md/close';
 import { NavBar } from './NavBar';
+import * as helpers from './helpers';
 
 class AdissonApp extends Component {
   state = {
@@ -17,33 +18,17 @@ class AdissonApp extends Component {
   }
 
   fetchData() {
-    const invocation = new XMLHttpRequest();
     const url = 'http://www.mocky.io/v2/59f08692310000b4130e9f71';
+    const xhr = helpers.createCORSRequest('GET', url);
+
+    if (!xhr) {
+      throw new Error('CORS not supported');
+    }
 
     return new Promise((resolve, reject) => {
-      if (invocation) {
-        invocation.open('GET', url, true);
-        invocation.onreadystatechange = handler;
-        invocation.send();
-      }
-      else {
-        reject(new Error('Something wring with API!'));
-      }
-
-      function handler(xhr) {
-        if (invocation.readyState === 4)
-        {
-          if (invocation.status === 200) {
-              outputResult();
-          }
-          else {
-            reject(new Error('Something wrong with API!'));
-          }
-        }
-      }
-      function outputResult() {
-        resolve(JSON.parse(invocation.responseText));
-      }
+      xhr.onload = () => resolve(JSON.parse(xhr.responseText));
+      xhr.onerror = () => reject(new Error('Something wring with API!'));
+      xhr.send();  
     })
   }
 
