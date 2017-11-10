@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Event from './Event';
-import Header from './Header';
+import BetSlip from './BetSlip';
+import LoadingScreen from './LoadingScreen';
+import { slide as Menu } from 'react-burger-menu';
 
 class AdissonApp extends Component {
   state = {
@@ -11,8 +13,8 @@ class AdissonApp extends Component {
   }
 
   fetchData() {
-    const uri = 'http://www.mocky.io/v2/59f08692310000b4130e9f71';
-    // const uri = 'http://www.mocky.io/v2/5a0375e03100008213916a52';
+    // const uri = 'http://www.mocky.io/v2/59f08692310000b4130e9f71';
+    const uri = 'http://www.mocky.io/v2/5a0375e03100008213916a52';
     const xhr = new XMLHttpRequest();
 
     return new Promise((resolve, reject) => {
@@ -50,10 +52,11 @@ class AdissonApp extends Component {
   render() {
     const { data, loading, betSlip } = this.state;
 
-    if (loading) { return "LOADING..." };
+    if (loading) return <LoadingScreen text='Loading, please wait...'/>;
 
     return (
       <div className="AddisonApp">
+        <div className='bm-burger-button'></div>
         <Grid>
           <Row>
             {data.length > 0 && (
@@ -71,10 +74,12 @@ class AdissonApp extends Component {
             )}
           </Row>
         </Grid>
-        <Header
+        <BetSlip
+          data={data}
           betSlip={betSlip}
           onClickBetSlip={this.deleteSelection}
         />
+        
       </div>
     );
   }
