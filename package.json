@@ -12,7 +12,8 @@
     "react-dom": "^16.0.0",
     "react-flexbox-grid": "^2.0.0",
     "react-icons": "^2.2.7",
-    "react-motion-drawer": "^2.1.7"
+    "react-motion-drawer": "^2.1.7",
+    "redux": "^3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

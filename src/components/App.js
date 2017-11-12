@@ -7,7 +7,7 @@ import BetSlip from './BetSlip';
 import LoadingScreen from './LoadingScreen';
 import IconClose from 'react-icons/lib/md/close';
 import { NavBar } from './NavBar';
-import * as helpers from './helpers';
+import * as utils from '../utils/utils';
 
 class AdissonApp extends Component {
   state = {
@@ -15,20 +15,6 @@ class AdissonApp extends Component {
     betSlip: [],
     loading: false,
     openDrawer: false
-  }
-
-  fetchData() {
-    const url = 'https://www.mocky.io/v2/59f08692310000b4130e9f71';
-    const xhr = helpers.createCORSRequest('GET', url);
-    
-    return new Promise((resolve, reject) => {
-      if (!xhr) {
-        throw new Error('CORS not supported');
-      }
-      xhr.onload = () => resolve(JSON.parse(xhr.responseText));
-      xhr.onerror = () => reject(new Error('Something went wrong with call.'));
-      xhr.send();
-    })
   }
 
   clickEvent = (event, market, selection) => {
@@ -46,8 +32,10 @@ class AdissonApp extends Component {
   }
 
   componentDidMount() {
+    const url = 'https://www.mocky.io/v2/59f08692310000b4130e9f71';
+
     this.setState({ loading:true });
-    this.fetchData()
+    utils.fetchData(url)
       .then(data => this.setState(state => ({ data, loading: false })))
       .catch(err => console.log(err));
   }

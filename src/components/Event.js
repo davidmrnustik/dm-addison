@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { customStyles as styles } from './CustomStyles';
-import * as utils from './helpers';
-import { EVENT_VS } from './constants';
+import * as utils from '../utils/utils';
+import { EVENT_VS } from '../constants/';
 import Market from './Market';
 
 class Event extends Component {
