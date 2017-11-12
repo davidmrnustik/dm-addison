@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Row } from 'react-flexbox-grid';
 import Selection from './Selection';
 import { customStyles as styles } from './CustomStyles';
 
 class Market extends Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    selections: PropTypes.array.isRequired,
-    betSlip: PropTypes.array.isRequired
+    id: PropTypes.string.isRequired
   }
 
   clickMarket = selection => {
@@ -17,20 +15,17 @@ class Market extends Component {
   }
 
   render() {
-    const { id, name, selections, betSlip } = this.props;
+    const { id, market } = this.props;
 
     return(
       <div className='market' style={styles.market}>
-        <div className='marginTitle' style={styles.marketTitle}>{name}</div>
+        <div className='marginTitle' style={styles.marketTitle}>{market.name}</div>
         <Row between='xs'>
-          {selections.map((selection, index) => (
+          {market.selections.map(selection => (
             <Selection
-              key={selection.id}
-              selected={betSlip
-                .reduce(((bool, current) => current.market === id ? true : false), false)}
-              onClickSelection={this.clickMarket}
-              betSlip={betSlip.filter(slip => slip.selection === selection.id)}
-              {...selection}
+              key={selection}
+              market={id}
+              id={selection}
             />
           ))}
         </Row>
@@ -39,4 +34,10 @@ class Market extends Component {
   }
 }
 
-export default Market;
+function mapStateToProps ({ eventList }, ownProps) {
+  return {
+    market: eventList.markets[ownProps.id]
+  }
+}
+
+export default connect(mapStateToProps)(Market);

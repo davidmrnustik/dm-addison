@@ -38,3 +38,15 @@ export function fetchData(url) {
     xhr.send();
   })
 }
+
+export function objectToArray(data){
+  const events = data;
+  const result = [];
+
+  for(let event in events) {
+    if (events.hasOwnProperty(event)) {
+      result.push(events[event])
+    }
+  }
+  return result;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Drawer from 'react-motion-drawer';
 import Event from './Event';
@@ -8,11 +9,10 @@ import LoadingScreen from './LoadingScreen';
 import IconClose from 'react-icons/lib/md/close';
 import { NavBar } from './NavBar';
 import * as utils from '../utils/utils';
+import { addEvent } from '../actions';
 
 class AdissonApp extends Component {
   state = {
-    data: [],
-    betSlip: [],
     loading: false,
     openDrawer: false
   }
@@ -32,16 +32,20 @@ class AdissonApp extends Component {
   }
 
   componentDidMount() {
-    const url = 'https://www.mocky.io/v2/59f08692310000b4130e9f71';
+    const url = 'https://www.mocky.io/v2/5a0375e03100008213916a52';
 
     this.setState({ loading:true });
     utils.fetchData(url)
-      .then(data => this.setState(state => ({ data, loading: false })))
+      .then(data => {
+        this.props.addEvent(data);
+        this.setState({ loading: false });
+      })
       .catch(err => console.log(err));
   }
 
   render() {
-    const { data, loading, betSlip, openDrawer } = this.state;
+    const { loading, openDrawer } = this.state;
+    const { events } = this.props;
     const drawerProps = {
       overlayColor: 'rgba(255,255,255,0.6)',
       drawerStyle: styles.drawer
@@ -63,35 +67,40 @@ class AdissonApp extends Component {
             <IconClose />
           </a>
 
-          <BetSlip
-            data={data}
-            betSlip={betSlip}
-            onClickBetSlip={this.deleteSelection}
-          />
+          <BetSlip />
         </Drawer>
 
         <NavBar onClickDrawer={() => this.setState({ openDrawer: !openDrawer })} />
 
         <Grid>
           <Row>
-            {data.length > 0 && (
-              data
+            {events.length > 0 && (
+              events
                 .filter(event => event.markets.length !== 0)
                 .map(event => (
                   <Col xs={12} md={4} key={event.id}>
-                    <Event
-                      data={event}
-                      onClickEvent={this.clickEvent}
-                      betSlip={betSlip.filter(slip => slip.event === event.id)}
-                    />
+                    <Event id={event.id}/>
                   </Col>
               ))
             )}
           </Row>
         </Grid>
+        
       </div>
     );
   }
 }
 
-export default AdissonApp;
+function mapStateToProps ({ eventList }) {
+  const events = utils.objectToArray(eventList.events);
+
+  return { events };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    addEvent: (data) => dispatch(addEvent(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdissonApp);

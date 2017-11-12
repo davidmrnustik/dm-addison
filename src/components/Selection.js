@@ -1,34 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addToBetSlip } from '../actions';
 import { Col } from 'react-flexbox-grid';
 import { customStyles as styles } from './CustomStyles';
 
 class Selection extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    betSlip: PropTypes.array.isRequired,
-    selected: PropTypes.bool.isRequired
+    market: PropTypes.string.isRequired
   }
 
   onClickHandler = event => {
     event.preventDefault();
-    this.props.onClickSelection(this.props.id);
+    this.props.addToBetSlip({
+      market: this.props.market,
+      selection: this.props.id
+    });
   }
 
   render() {
-    const { id, name, price, betSlip, selected } = this.props;
-
-    let button = !selected ?
-      <button onClick={this.onClickHandler}>{name}<br/>{price}</button> :
-      <button>{name}<br/>{price}</button>
-
-    betSlip.forEach(slip => {
-      if (slip.selection === id) {
-        button = <button style={styles.buttonSelected}>{name}<br/>{price}</button>
-      }
-    })
+    const { selection } = this.props;
+    
+    let button = <button onClick={this.onClickHandler}>{selection.name}<br/>{selection.price}</button>
 
     return(
       <Col>
@@ -38,4 +32,16 @@ class Selection extends Component {
   }
 }
 
-export default Selection;
+function mapStateToProps ({ eventList }, ownProps) {
+  return {
+    selection: eventList.selections[ownProps.id]
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    addToBetSlip: (data) => dispatch(addToBetSlip(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Selection);
