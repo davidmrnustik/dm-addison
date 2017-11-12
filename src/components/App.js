@@ -17,20 +17,6 @@ class AdissonApp extends Component {
     openDrawer: false
   }
 
-  clickEvent = (event, market, selection) => {
-    let obj = { event, market, selection };
-
-    this.setState(state => ({
-      betSlip: state.betSlip.concat([ obj ])
-    }))
-  }
-
-  deleteSelection = selection => {
-    this.setState(state => ({
-      betSlip: state.betSlip.filter(slip => slip.selection !== selection.selection)
-    }))
-  }
-
   componentDidMount() {
     const url = 'https://www.mocky.io/v2/5a0375e03100008213916a52';
 

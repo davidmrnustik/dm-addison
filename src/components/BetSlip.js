@@ -44,7 +44,6 @@ function mapStateToProps ({ eventList, betSlip }) {
       market: eventList.markets[slip.market],
       selection: eventList.selections[slip.selection]
     }))
-
   }
 }
 
