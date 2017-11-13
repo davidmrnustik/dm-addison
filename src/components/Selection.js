@@ -25,13 +25,15 @@ export class Selection extends Component {
 
   render() {
     const { id, selection, betSlip } = this.props;
+    const name = <div className='selection-name' style={styles.selectionName}>{selection.name}</div>;
+    const price = <div className='selection-price' style={styles.selectionPrice}>{selection.price}</div>;
 
-    let button = <button onClick={this.addToBetSlip}>{selection.name}<br/>{selection.price}</button>;
+    let button = <button onClick={this.addToBetSlip}>{name}{price}</button>;
 
     betSlip.forEach(item => {
       if(item === id) {
         button = <button className='button-selected' onClick={this.removeFromBetSlip} style={styles.buttonSelected}>
-          {selection.name}<br/>{selection.price}
+          {name}{price}
         </button>
       }
     })
