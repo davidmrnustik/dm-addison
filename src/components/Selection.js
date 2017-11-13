@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addToBetSlip } from '../actions';
+import { addToBetSlip, removeFromBetSlip } from '../actions';
 import { Col } from 'react-flexbox-grid';
 import { customStyles as styles } from './CustomStyles';
 
 export class Selection extends Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    market: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired
   }
 
-  onClickHandler = event => {
+  addToBetSlip = event => {
     event.preventDefault();
     this.props.addToBetSlip({
       market: this.props.market,
@@ -19,20 +18,21 @@ export class Selection extends Component {
     });
   }
 
+  removeFromBetSlip = event => {
+    event.preventDefault();
+    this.props.removeFromBetSlip(this.props.id);
+  }
+
   render() {
-    const { id, market, selection, betSlip } = this.props;
+    const { id, selection, betSlip } = this.props;
 
-    let button = <button onClick={this.onClickHandler}>{selection.name}<br/>{selection.price}</button>;
+    let button = <button onClick={this.addToBetSlip}>{selection.name}<br/>{selection.price}</button>;
 
-    betSlip.market.forEach(item => {
-      if(item === market) {
-        button = <button>{selection.name}<br/>{selection.price}</button>
-      }
-    })
-
-    betSlip.selection.forEach(item => {
+    betSlip.forEach(item => {
       if(item === id) {
-        button = <button className='button-selected' style={styles.buttonSelected}>{selection.name}<br/>{selection.price}</button>
+        button = <button className='button-selected' onClick={this.removeFromBetSlip} style={styles.buttonSelected}>
+          {selection.name}<br/>{selection.price}
+        </button>
       }
     })
 
@@ -47,17 +47,15 @@ export class Selection extends Component {
 function mapStateToProps ({ eventList, betSlip }, ownProps) {
 
   return {
-    betSlip: {
-      selection: betSlip.map(slip => slip.selection),
-      market: betSlip.map(slip => slip.market)
-    },
+    betSlip: betSlip.map(slip => slip.selection),
     selection: eventList.selections[ownProps.id]
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    addToBetSlip: (data) => dispatch(addToBetSlip(data))
+    addToBetSlip: (data) => dispatch(addToBetSlip(data)),
+    removeFromBetSlip: (data) => dispatch(removeFromBetSlip(data))
   }
 }
 
