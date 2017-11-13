@@ -46,3 +46,12 @@ button:hover {
 .navbar a {
   color: #fff;
 }
+.betSlip-item:first-child {
+  margin-top: 40px;
+}
+.betSlip-item {
+  border-bottom: 1px solid #dadada;
+}
+.betSlip-item:last-child {
+  border-bottom: 0;
+}

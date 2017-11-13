@@ -18,7 +18,7 @@ export class AdissonApp extends Component {
   }
 
   componentDidMount() {
-    const url = 'https://www.mocky.io/v2/5a0375e03100008213916a52';
+    const url = 'https://www.mocky.io/v2/59f08692310000b4130e9f71';
 
     this.setState({ loading:true });
     utils.fetchData(url)

@@ -30,7 +30,6 @@ export const customStyles = {
   },
   drawer: {
     background: '#F9F9F9',
-    paddingTop: 40,
     boxShadow: 'rgba(0, 0, 0, 0.188235) 0px 10px 20px, rgba(0, 0, 0, 0.227451) 0px 6px 6px'
   },
   navBar: {
@@ -86,7 +85,6 @@ export const customStyles = {
   betSlipItem: {
     marginLeft: 30,
     marginRight: 30,
-    borderBottom: '1px solid #dadada',
     paddingBottom: 20,
     marginBottom: 20
   },
