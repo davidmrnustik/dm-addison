@@ -8,7 +8,7 @@ import { customStyles as styles } from './CustomStyles';
 export const Market = (props) => {
   return(
     <div className='market' style={styles.market}>
-      <div className='marginTitle' style={styles.marketTitle}>{props.market.name}</div>
+      <div className='marketTitle' style={styles.marketTitle}>{props.market.name}</div>
       <Row between='xs'>
         {props.market.selections.map(selection => (
           <Selection

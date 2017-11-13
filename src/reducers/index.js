@@ -18,7 +18,7 @@ function eventList (state = [], action) {
         selections: [selection]
       });
       const eventList = new schema.Entity('events', {
-        markets: [market],
+        markets: [market]
       })
       const { entities } = normalize(event, [eventList]);
 

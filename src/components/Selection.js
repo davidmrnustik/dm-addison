@@ -5,7 +5,7 @@ import { addToBetSlip } from '../actions';
 import { Col } from 'react-flexbox-grid';
 import { customStyles as styles } from './CustomStyles';
 
-class Selection extends Component {
+export class Selection extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     market: PropTypes.string.isRequired
@@ -32,7 +32,7 @@ class Selection extends Component {
 
     betSlip.selection.forEach(item => {
       if(item === id) {
-        button = <button style={styles.buttonSelected}>{selection.name}<br/>{selection.price}</button>
+        button = <button className='button-selected' style={styles.buttonSelected}>{selection.name}<br/>{selection.price}</button>
       }
     })
 

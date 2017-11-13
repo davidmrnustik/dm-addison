@@ -11,7 +11,7 @@ import { NavBar } from './NavBar';
 import * as utils from '../utils/utils';
 import { addEvent } from '../actions';
 
-class AdissonApp extends Component {
+export class AdissonApp extends Component {
   state = {
     loading: false,
     openDrawer: false
@@ -60,6 +60,9 @@ class AdissonApp extends Component {
 
         <Grid>
           <Row>
+            {events.length === 0 && (
+              <p className='no-message'>There is no data to be loaded.</p>
+            )}
             {events.length > 0 && (
               events
                 .filter(event => event.markets.length !== 0)

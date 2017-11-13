@@ -4,7 +4,7 @@ import { Grid } from 'react-flexbox-grid';
 import { customStyles as styles } from './CustomStyles';
 import { removeFromBetSlip } from '../actions';
 
-class BetSlip extends Component {
+export class BetSlip extends Component {
   onClickHandler = (event, selection) => {
     event.preventDefault();
     this.props.removeFromBetSlip(selection);

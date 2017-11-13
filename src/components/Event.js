@@ -10,9 +10,9 @@ export const Event = (props) => {
   return(
     <div className='event' style={styles.event}>
       <div className='eventTitle' style={styles.eventTitle}>
-        {utils.parseNameFromEvent(props.event.name).first}
+        {utils.splitNamesFromEvent(props.event.name).first}
         <span className='eventNamesDivider' style={styles.paddingVs}>{EVENT_VS}</span>
-        {utils.parseNameFromEvent(props.event.name).second}
+        {utils.splitNamesFromEvent(props.event.name).second}
       </div>
 
       {props.event.markets.map(market => (
