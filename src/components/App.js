@@ -33,7 +33,7 @@ export class AdissonApp extends Component {
     const { loading, openDrawer } = this.state;
     const { events } = this.props;
     const drawerProps = {
-      overlayColor: 'rgba(255,255,255,0.6)',
+      overlayColor: 'rgba(0,0,0,0.6)',
       drawerStyle: styles.drawer
     };
 
@@ -49,7 +49,7 @@ export class AdissonApp extends Component {
           right={true}
           onChange={open => this.setState({ openDrawer: open })}
         >
-          <a onClick={() => this.setState({ openDrawer: !openDrawer })} style={styles.iconBars}>
+          <a className='iconBars' onClick={() => this.setState({ openDrawer: !openDrawer })} style={styles.iconBars}>
             <IconClose />
           </a>
 
@@ -61,7 +61,7 @@ export class AdissonApp extends Component {
         <Grid>
           <Row>
             {events.length === 0 && (
-              <p className='no-message'>There is no data to be loaded.</p>
+              <p className='no-message' style={styles.noMessage}>There is no data to be loaded.</p>
             )}
             {events.length > 0 && (
               events

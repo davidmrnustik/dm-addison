@@ -6,6 +6,7 @@ import { customStyles as styles } from './CustomStyles';
 export const NavBar = props => {
   return(
     <div className='navbar' style={styles.navBar}>
+      <img style={styles.logo} src='./logo.jpg' alt='Addison Global'/>
       <a onClick={props.onClickDrawer} style={styles.iconBars}>
         <IconBars />
       </a>
