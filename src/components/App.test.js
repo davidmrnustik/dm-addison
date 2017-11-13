@@ -20,7 +20,7 @@ describe('App component', () => {
     };
     const wrapper = shallow(<AdissonApp {...props} />);
     wrapper.setState({ loading: false });
-    const message = wrapper.find('.no-message');
+    const message = wrapper.find('.no-data-message');
     expect(message.text()).toEqual('There is no data to be loaded.');
   });  
 })

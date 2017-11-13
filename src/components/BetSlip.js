@@ -16,7 +16,7 @@ export class BetSlip extends Component {
     return(
       <Grid style={styles.betSlip}>
         {betSlip.length === 0 && (
-          <p>There is no selections.</p>
+          <p style={styles.noMessage}>There is no selections.</p>
         )}
         {betSlip.map(({ market, selection }) => (
           <div key={selection.id} className='betSlip-item' style={styles.betSlipItem}>

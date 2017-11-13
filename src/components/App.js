@@ -61,7 +61,7 @@ export class AdissonApp extends Component {
         <Grid>
           <Row>
             {events.length === 0 && (
-              <p className='no-message' style={styles.noMessage}>There is no data to be loaded.</p>
+              <p className='no-data-message'>There is no data to be loaded.</p>
             )}
             {events.length > 0 && (
               events

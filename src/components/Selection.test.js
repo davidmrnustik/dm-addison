@@ -15,10 +15,7 @@ describe('Selection component', () => {
       name: 'Real Madrid',
       price: 1.23
     },
-    betSlip: {
-      selection: ['SEL_1', 'SEL_2'],
-      market: ['MKT_1', 'MKT_2']
-    }
+    betSlip: ['SEL_1', 'SEL_2']
   };
   const wrapper = mount(<Selection {...props}/>, {
               context: { store },
@@ -31,7 +28,7 @@ describe('Selection component', () => {
 
   it('simulates click on button and check if button has green background color with white text', () => {
     const button = wrapper.find('button');
-    button.simulate('click');
-    expect(wrapper.find('.button-selected').html()).toEqual('<button class=\"button-selected\" style=\"color: white; background-color: rgb(92, 184, 92); border: 0px;\">Real Madrid<br>1.23</button>');
+    button.simulate('submit');
+    expect(wrapper.find('.button-selected').html()).toEqual('<button class=\"button-selected\" style=\"color: white; background-color: rgb(92, 184, 92); border: 1px solid #5cb85c;\"><div class=\"selection-name\" style=\"padding-bottom: 2px;\">Real Madrid</div><div class=\"selection-price\" style=\"font-weight: bold;\">1.23</div></button>');
   });
 })

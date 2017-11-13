@@ -100,6 +100,7 @@ export const customStyles = {
     paddingBottom: 10
   },
   noMessage: {
-    fontSize: 14
+    fontSize: 14,
+    marginTop: 40
   }
 }
