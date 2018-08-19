@@ -1,7 +1,7 @@
 import React from 'react';
 import { Selection } from './Selection';
 import PropTypes from 'prop-types';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import configureStore from '../store/configureStore';
 
 const store = configureStore();

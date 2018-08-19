@@ -10,6 +10,7 @@ describe('Market component', () => {
 
   it('renders data provided', () => {
     const props = {
+      id: 'MKT_1',
       market: {
         id: 'MKT_1',
         name: 'Team to Win',

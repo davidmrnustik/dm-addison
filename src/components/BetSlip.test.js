@@ -1,7 +1,7 @@
 import React from 'react';
 import { BetSlip } from './BetSlip';
 import PropTypes from 'prop-types';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import configureStore from '../store/configureStore';
 
 const store = configureStore();

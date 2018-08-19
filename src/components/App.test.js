@@ -1,10 +1,6 @@
 import React from 'react';
 import { AdissonApp } from './App';
-import PropTypes from 'prop-types';
-import { shallow, mount } from 'enzyme';
-import configureStore from '../store/configureStore';
-
-const store = configureStore();
+import { shallow } from 'enzyme';
 
 describe('App component', () => {
   it('renders without crashing', () => {

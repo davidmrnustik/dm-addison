@@ -1,4 +1,4 @@
-import * as utils from '../utils/utils';
+import {splitNamesFromEvent, objectToArray } from '../utils/utils';
 
 describe('Split names from event', () => {
   it('splitNamesFromEvent should return object with two properties', () => {
@@ -7,7 +7,7 @@ describe('Split names from event', () => {
       first: 'Real Madrid',
       second: 'Barcelona'
     };
-    expect(utils.splitNamesFromEvent(names)).toEqual(expected);
+    expect(splitNamesFromEvent(names)).toEqual(expected);
   })
 
   it('objectToArray should return array', () => {
@@ -45,6 +45,6 @@ describe('Split names from event', () => {
         ]
       }
     ];
-    expect(utils.objectToArray(object)).toEqual(array);
+    expect(objectToArray(object)).toEqual(array);
   })
 })

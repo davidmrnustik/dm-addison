@@ -1,7 +1,7 @@
 import React from 'react';
 import { Event } from './Event';
 import PropTypes from 'prop-types';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import configureStore from '../store/configureStore';
 
 const store = configureStore();
@@ -10,6 +10,7 @@ describe('Event component', () => {
 
   it('renders data provided', () => {
     const props = {
+      id: 'EVT_1',
       event: {
         id: 'EVT_1',
         name: 'Real Madrid vs Barcelona',
